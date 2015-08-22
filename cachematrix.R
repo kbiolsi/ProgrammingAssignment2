@@ -7,12 +7,12 @@ makeCacheMatrix<-function(matx=matrix()) {
       matx_inv<-NULL					# Initialize the matrix inverse to NULL
 
 	set<-function(y) {				# (Re)set the elements of the matrix and initialize
-		matx<<-y					#   the value of its inverse to NULL
+		matx<<-y				#   the value of its inverse to NULL
 		matx_inv<<-NULL				# NOTE: set() is not really used in this assignment,
-	}							#   but it may be useful as a counterpart to get()
+	}						#   but it may be useful as a counterpart to get()
 
 	get<-function() matx				# Return the elements of the matrix
-	setinv<-function(inv) matx_inv<<-inv	# Set the matrix inverse (in the parent environment)
+	setinv<-function(inv) matx_inv<<-inv		# Set the matrix inverse (in the parent environment)
       getinv<-function() matx_inv			# Retrieve the inverse of the matrix
 	list(set=set,get=get,setinv=setinv,getinv=getinv)	# Construct the special matrix list
 }
@@ -24,16 +24,16 @@ makeCacheMatrix<-function(matx=matrix()) {
 
 cacheSolve<-function(matx_list,...) {
 	matx_inv<-matx_list$getinv()			# Return either the cached value of the matrix inverse or
-								#   NULL if the inverse has not previously been cached
+							#   NULL if the inverse has not previously been cached
 	if(!is.null(matx_inv)) {			# If the inverse is already cached, return the cached value
-		message("getting cached data")	#   and exit cacheSolve
+		message("getting cached data")		#   and exit cacheSolve
 		return(matx_inv)
 	}
 
 	# If the inverse has not already been cached ...
 	data<-matx_list$get()				# Retrieve the matrix elements
 	matx_inv<-solve(data, ...)			# Compute the inverse of the matrix
-								#   NOTE: This code assumes the given matrix is invertible
+							#   NOTE: This code assumes the given matrix is invertible
 	matx_list$setinv(matx_inv)			# Cache the matrix inverse
-	matx_inv						# Return the matrix inverse
+	matx_inv					# Return the matrix inverse
 }
