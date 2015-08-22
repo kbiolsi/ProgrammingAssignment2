@@ -4,7 +4,7 @@
 #   retrieve its value, set the inverse of the matrix, and retrieve the inverse.
 
 makeCacheMatrix<-function(matx=matrix()) {
-      matx_inv<-NULL					# Initialize the matrix inverse to NULL
+	matx_inv<-NULL					# Initialize the matrix inverse to NULL
 
 	set<-function(y) {				# (Re)set the elements of the matrix and initialize
 		matx<<-y				#   the value of its inverse to NULL
@@ -13,7 +13,7 @@ makeCacheMatrix<-function(matx=matrix()) {
 
 	get<-function() matx				# Return the elements of the matrix
 	setinv<-function(inv) matx_inv<<-inv		# Set the matrix inverse (in the parent environment)
-      getinv<-function() matx_inv			# Retrieve the inverse of the matrix
+	getinv<-function() matx_inv			# Retrieve the inverse of the matrix
 	list(set=set,get=get,setinv=setinv,getinv=getinv)	# Construct the special matrix list
 }
 
